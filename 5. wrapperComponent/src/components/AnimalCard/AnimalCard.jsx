@@ -1,31 +1,33 @@
 import React from 'react'
 import PropTypes from "prop-types"
 
-import "./AnimalCard.css"
-
 import AnimalDetails from '../AnimalDetails/AnimalDetails'
+import Card from "../Card/Card"
 
 
 const AnimalCard = ( { name, size, ...props  } ) => {
 
 
           return (
-                    <div className= "animal-wrapper">
-                              <h2> {name} </h2>
+                    <Card 
+                              title="Animal" 
+                              // details={<em> Mammal</em>}
 
-                              <h4>{size}kg</h4>
+                              details ={
+                                        <AnimalDetails 
+                                                  {...props}
+                                        />                    
+                              }
+                                        
+                    >
+                              <h3> {name} </h3>
 
-                              <AnimalDetails 
+                              <div>{size}kg</div>
+
+                              {/* <AnimalDetails 
                                         {...props}
-                              />
-
-                              {/* <button 
-                                        onClick = {() => showAdditional(additional)}
-                              >
-                                        More Info
-                              </button> */}
-                    
-                    </div>
+                              />                     */}
+                    </Card>
 
           )
 }
@@ -43,11 +45,7 @@ AnimalCard.propTypes = {
 }
 
 
-AnimalCard.defaultProps = {
-          additional: {
-                    notes: 'No Additional Information'
-          }
-}
+
 
 
 /*
