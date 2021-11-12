@@ -2,39 +2,25 @@ import "./App.css"
 import { useState, useReducer } from "react"
 
 
-// ctrlled compont
+// unctr component
 const formReducer = (state, event) => {
-	if(event.reset) {
-		return {
-			apple: '',
-
-			count: 0,
-			
-			name: '',
-			
-			"gift-wrap": false
-		}
-	}
 
 	return {
 		...state,
 
 		// name: value pair
+		// [event.target.name]: event.target.value
+
+		// remove d target
 		[event.name]: event.value
 	}
 }
 
-/*
-you converted your uncontrolled components to controlled
-components by setting the value or the checked attributes dynamically.
-You also learned how to refill data by setting a default state and how to
-clear the data by updating the form reducer to return default values.
-*/ 
 
 function App() {
 	const [submitting, setSubmitting] = useState(false)
 
-	const [formData, setFormData] = useReducer(formReducer, {count: 100})
+	const [formData, setFormData] = useReducer(formReducer, {})
 
 
 	const handleSubmit = event => {
@@ -42,16 +28,9 @@ function App() {
 
 		setSubmitting(true)
 
-		
 		setTimeout(
 			() => {
 				setSubmitting(false)
-
-				setFormData(
-					{
-						reset: true
-					}
-				)
 			}, 
 
 			3000
@@ -59,6 +38,7 @@ function App() {
 	}
 
 	const handleChange = event => {
+                    // event.target.type/.name/.checked
 		const isCheckbox = event.target.type === "checkbox"
 
 		setFormData(
@@ -83,7 +63,9 @@ function App() {
 						<ul>
 							{
 								Object.entries(formData).map(([name, value]) => (
-									<li key={name}><strong>{name}</strong>: {value.toString()}</li>
+									<li key={name}>
+                                                                                                    <strong>{name}</strong>: {value.toString()}
+                                                                                          </li>
 								))
 							}
 						</ul>
@@ -91,25 +73,21 @@ function App() {
 			}
 
 			<form onSubmit={handleSubmit}>
-				<fieldset disabled={submitting} >
+				<fieldset>
 					<label>
 						<p> Name: </p>
 
 						{/* <input name="name" onChange={setFormData} /> */}
-						<input 
-							name="name" 
-							onChange={handleChange} 
-							value = {formData.name || ''}
-						/>
+						<input name="name" onChange={handleChange} />
 					</label>
 				</fieldset>
 
 
-				<fieldset disabled={submitting} >
+				<fieldset>
 					<label>
 						<p> Apple: </p>
 
-						<select name="apple" onChange={handleChange} value = {formData.apple || ''} >
+						<select name="apple" onChange={handleChange}>
 							<option value="">  --Please choose an option-- </option>
 
 							<option value="fuji"> Fuji </option>
@@ -124,41 +102,21 @@ function App() {
 					<label>
 						<p> Count: </p>
 
-						<input 
-							type="number" 
-							name="count" 
-							onChange={handleChange} 
-							step="1" 
-							value={formData.count || ''}
-						/>
+						<input type="number" name="count" onChange={handleChange} />
 
 					</label>
 
 					<label>
 						<p> Gift Wrap: </p>
 
-						<input 
-							type="checkbox" 
-							name="gift-wrap" 
-							onChange={handleChange} 
-
-							/*As before, the checkbox is a little different. Instead of 
-							setting a value, you’ll need to set the checked attribute.*/ 
-							checked={formData['gift-wrap'] || false} 
-							disabled={formData.apple !== "fuji"}
-						/>
+						<input type="checkbox" name="gift-wrap" onChange={handleChange} />
 
 					</label>
 
 				</fieldset>
 
 
-				<button 
-					type="submit"
-					disabled={submitting}
-				> 
-					Submit 
-				</button>
+				<button type="submit"> Submit </button>
 			</form>
 		</div>
 	);
