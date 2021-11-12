@@ -28,6 +28,7 @@ const SaladMaker = () => {
           const classes = useStyles()
 
           const [ salad, setSalad ] = useReducer(reducer, [])
+          
 
           return (
                     <SaladContext.Provider value={{salad, setSalad}}>
