@@ -1,7 +1,6 @@
 {
   "name": "digital-ocean-tutorial",
   "version": "0.1.0",
-  "homepage": "http://arabog.github.io/myappp",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",

@@ -31,50 +31,75 @@ export default class Product extends Component {
           }
 
 
+          // add = (product) => {
+          //           this.setState(state => (
+          //                     {
+          //                               cart: [...state.cart, product.name],
+
+          //                               total: state.total + product.price
+          //                     }
+          //           ))
+          // }
+
+          // add() method adds the whole object
           add = (product) => {
                     this.setState(state => (
                               {
-                                        cart: [...state.cart, product.name],
-
-                                        total: state.total + product.price
+                                        cart: [...state.cart, product]
                               }
                     ))
           }
 
 
+          // remove() method removes the whole object
           remove = (product) => {
-                    // my attempt
-                    // this.setState(state => (
-                    //           {
-                    //                     cart: [...state.cart]
+                    this.setState(state => {
+                              const cart = [...state.cart]
 
-                    //                     total: state.total - product.price
-                    //           }
-                    // ))
-                    
+                              const productIndex = cart.findIndex(p => p.name === product.name)
 
-                    this.setState(state => 
-                              {
-                                        const cart = [...state.cart];
-
-                                        cart.splice(cart.indexOf(product.name))
-
-                                        // cart.splice(cart.findIndex(item => item.name === product.name))
-                                        
-                                        // cart.filter(item => item.name === product.name),
-
-
-
-                                        return (
-                                                  {
-                                                            cart,
-
-                                                            total: state.total - product.price
-                                                  }
-                                        )
+                              /* By returning nothing, React will know the 
+                              state didn't change and won’t trigger a re-render.
+                              if u return state or an empty object, it will still 
+                              trigger a re-render */
+                              if (productIndex === -1) {
+                                        return
                               }
-                    )
+
+                              cart.splice(productIndex, 1)
+
+                              return (
+                                        { cart }
+                              )
+                    })
+
           }
+
+
+          // remove = (product) => {
+          
+          //           this.setState(state => 
+          //                     {
+          //                               const cart = [...state.cart];
+
+          //                               cart.splice(cart.indexOf(product.name))
+
+          //                               // cart.splice(cart.findIndex(item => item.name === product.name))
+                                        
+          //                               // cart.filter(item => item.name === product.name),
+
+
+
+          //                               return (
+          //                                         {
+          //                                                   cart,
+
+          //                                                   total: state.total - product.price
+          //                                         }
+          //                               )
+          //                     }
+          //           )
+          // }
 
 
           currencyOptions = {
@@ -82,9 +107,17 @@ export default class Product extends Component {
                     maximumFractionDigits: 2,
           }
 
+          // getTotal = () => {
+          //           return this.state.total.toLocaleString(undefined, this.currencyOptions)
+          // }
+
           getTotal = () => {
-                    return this.state.total.toLocaleString(undefined, this.currencyOptions)
+                    const total = this.state.cart.reduce((totalCost, item) => totalCost + item.price, 0)
+
+                    return total.toLocaleString(undefined, this.currencyOptions)
           }
+
+          
 
 
           render() {
@@ -93,8 +126,7 @@ export default class Product extends Component {
                                         <div>Shopping Cart: {this.state.cart.length} total items</div>
 
                                         <div> Total: ${this.getTotal()} </div>
-
-
+                                        
 
                                         <div>
                                                   {
