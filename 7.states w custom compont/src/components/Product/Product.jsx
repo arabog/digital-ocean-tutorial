@@ -48,8 +48,9 @@ export default class Product extends Component {
                                         cart: [...state.cart, product]
                               }
                     ))
-          }
 
+          }
+          
 
           // remove() method removes the whole object
           remove = (product) => {
@@ -121,12 +122,16 @@ export default class Product extends Component {
 
 
           render() {
+                    const item = this.state.cart
+
+                    console.log(item)
+
                     return (
                               <div className="wrapper">
                                         <div>Shopping Cart: {this.state.cart.length} total items</div>
 
                                         <div> Total: ${this.getTotal()} </div>
-                                        
+
 
                                         <div>
                                                   {
