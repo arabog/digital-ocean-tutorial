@@ -1,10 +1,23 @@
 import "./FileNamer.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 
 const FileNamer = () => {
           const [name, setName] = useState("")
           const [alert, setAlert] = useState(false)
+
+          useEffect(() => {
+                    const handleWindowClick = () => setAlert(false)
+
+                    if(alert) {
+                              window.addEventListener("click", handleWindowClick)
+                    }else {
+                              window.removeEventListener("click", handleWindowClick)
+                    }
+
+                    return () => window.removeEventListener("click", handleWindowClick)
+                    
+          }, [alert, setAlert])
 
           const validate = event => {
                     event.preventDefault()
@@ -46,25 +59,37 @@ const FileNamer = () => {
 
                                                             autoComplete = "off"
 
-                                                            onBlur={() => setAlert(false)}
+                                                            // onBlur={() => setAlert(false)}
 
                                                             // onChange={event => setName(event.target.value)}
                                                             onChange={handleChange}
 
-                                                            onFocus={() => setAlert(true)}
+                                                            // onFocus={() => setAlert(true)}
                                                   />
                                         </label>
 
-                                        {
-                                                  alert && 
-                                                            <div> 
-                                                                      <span role="img" aria-label="allowed">✅</span> Alphanumeric Characters
-                                                                      
-                                                                      <br />
-                                                                      
-                                                                      <span role="img" aria-label="not allowed">⛔ </span>*
-                                                            </div> 
-                                        }
+                                        <div className="information-wrapper">
+                                                  <button 
+                                                            className="information"
+                                                            onClick={() => setAlert(true)}
+                                                            type="button"
+                                                  >
+                                                            More information
+                                                  </button>
+
+                                                  {
+                                                            alert && 
+                                                                      <div> 
+                                                                                <span role="img" aria-label="allowed">✅</span> Alphanumeric Characters
+                                                                                
+                                                                                <br />
+                                                                                
+                                                                                <span role="img" aria-label="not allowed">⛔ </span>*
+                                                                      </div> 
+                                                  }
+
+                                        </div>
+
 
 
                                         <div> 
