@@ -8,7 +8,7 @@ const formReducer = (state, event) => {
 		return {
 			apple: '',
 
-			count: 0,
+			count: 100,
 			
 			name: '',
 			
@@ -58,7 +58,7 @@ function App() {
 		)
 	}
 
-	const handleChange = event => {
+	const handleChange = (event) => {
 		const isCheckbox = event.target.type === "checkbox"
 
 		setFormData(
@@ -69,6 +69,8 @@ function App() {
 			}
 		)
 	}
+
+	console.log(formData)
 
 
 	return (
@@ -83,13 +85,17 @@ function App() {
 						<ul>
 							{
 								Object.entries(formData).map(([name, value]) => (
-									<li key={name}><strong>{name}</strong>: {value.toString()}</li>
+									<li key={name}>
+										<strong>{name}</strong>: {value.toString()}
+									</li>
 								))
 							}
 						</ul>
 					</div>
 			}
 
+
+			{/* add an event handler to the <form> elemt, not the  <button> */}
 			<form onSubmit={handleSubmit}>
 				<fieldset disabled={submitting} >
 					<label>
@@ -154,7 +160,7 @@ function App() {
 
 
 				<button 
-					type="submit"
+					type="submit" //prevent default reload
 					disabled={submitting}
 				> 
 					Submit 

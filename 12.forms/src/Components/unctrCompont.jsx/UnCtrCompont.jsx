@@ -37,7 +37,7 @@ function App() {
 		)
 	}
 
-	const handleChange = event => {
+	const handleChange = (event) => {
                     // event.target.type/.name/.checked
 		const isCheckbox = event.target.type === "checkbox"
 
@@ -60,11 +60,40 @@ function App() {
 					<div>
 						You are submitting the following... 
 
+
+						{/*
+							What Object entries is doing in converting obj to array
+							input obj:
+							const obj = { 
+								apple: "fuji", 
+
+								count: "200", 
+
+								name: "Working?", 
+
+								giftwrap: true ,
+							}
+
+
+							output arr: (it is a key value arr)
+							const arr = [
+								[ 'apple', 'fuji' ],
+
+								[ 'count', '200' ],
+
+								[ 'name', 'Working?' ],
+
+								[ 'giftwrap', true ],
+
+							]
+						*/}
+
+
 						<ul>
 							{
-								Object.entries(formData).map(([name, value]) => (
+								Object.entries(formData).map(  ( [ name, value ] ) => (
 									<li key={name}>
-                                                                                                    <strong>{name}</strong>: {value.toString()}
+                                                                                                    <strong>{name}</strong>: {value.toString()}  {/* convert 4rm arr to str */}
                                                                                           </li>
 								))
 							}
