@@ -8,10 +8,9 @@ const formReducer = (state, event) => {
 	return {
 		...state,
 
-		// name: value pair
 		// [event.target.name]: event.target.value
 
-		// remove d target
+	// remove d event.target keyword & use event parameter in formReducer
 		[event.name]: event.value
 	}
 }
@@ -61,7 +60,7 @@ function App() {
 						You are submitting the following... 
 
 
-						{/*
+						{/* See
 							What Object entries is doing in converting obj to array
 							input obj:
 							const obj = { 
