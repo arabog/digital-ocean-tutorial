@@ -12,10 +12,21 @@ const RiverInformation = ( { name } ) => {
 
 
           useEffect(() => {
+                    let mounted = true;
+
                     getRiverInformation(name)
                               .then(data => {
-                                        setRiverInfo(data)
+
+                                        if(mounted) {
+                                                  setRiverInfo(data)
+                                        }
+
                               })
+
+
+                              return () => {
+                                        mounted = false;
+                              }
           }, [name])
 
 

@@ -29,10 +29,10 @@ export function getRiverInformation(name) {
 
 
           return new Promise((resolve) => {
-                    setTimeout(() => {
-                              resolve(
-                                        rivers[name]
-                              )
-                    }, 1500)
-          })
+                    setTimeout(
+                              () => {
+                                        resolve(  rivers[name]  )
+                              }, 1500)
+                    }
+          )
 }
