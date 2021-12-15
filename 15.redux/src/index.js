@@ -10,7 +10,8 @@ import { createStore } from "redux"
 // npm install/yarn add --save redux react-redux
 
 
-import birdApp from "./components/Store/Birds/Birds"
+// import birdApp from "./components/Store/Birds/Birds"
+import birdApp from "./components/Redux/Store"
 
 
 const store = createStore(birdApp)

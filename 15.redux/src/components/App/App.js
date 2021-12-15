@@ -3,7 +3,10 @@ import "./App.css"
 import { useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { addBird, incrementBird } from "../../components/Store/Birds/Birds"
+// import { addBird, incrementBird } from "../Redux/Birds/Birds"
+
+// actions
+import { addBird, incrementBird } from "../Redux/Action"
 
 
 /*
@@ -28,14 +31,23 @@ function App() {
 
 	})
 
+
 	const dispatch = useDispatch()
 
+
+	/*
+	you need to dispatch the addBird action. This will take two steps:
+	saving the input to an internal state and triggering the dispatch 
+	with onSubmit Use the useState Hook to save the input value.
+	*/ 
 	const [birdName, setBirdName] = useState("")
 
 	const handleSubmit = event => {
 		event.preventDefault()
 
-		dispatch(addBird(birdName))
+		dispatch(
+			addBird(birdName)
+		)
 
 		setBirdName("")
 	}
