@@ -1,9 +1,10 @@
 // you are exporting the function so that you can 
 // later import and dispatch it from your component.
-import { combineReducers } from "redux"
+import { combineReducers } from "redux";
 
-const ADD_BIRD = "ADD_BIRD"
-const INCREMENT_BIRD = "INCREMENT_BIRD"
+
+const ADD_BIRD = "ADD_BIRD";
+const INCREMENT_BIRD = "INCREMENT_BIRD";
 
 
 // action
@@ -59,6 +60,8 @@ are no changes. Redux will run all the reducers
 anytime you dispatch an action, so if you don’t 
 return state you risk losing your changes.
 */ 
+
+
 // reducers
 function birds (state=defaultBirds, action) {
           // return state;

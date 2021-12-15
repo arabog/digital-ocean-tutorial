@@ -15,6 +15,18 @@ import birdApp from "./components/Store/Birds/Birds"
 
 const store = createStore(birdApp)
 
+
+ReactDOM.render(
+	<React.StrictMode>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</React.StrictMode>,
+
+	document.getElementById('root')
+);
+
+
 // const store = createStore(
 // 	() => (
 // 		// obj in anonymous fxn
@@ -26,23 +38,13 @@ const store = createStore(birdApp)
 // 					views: 1
 // 				},
 
-// 				// {
-// 				// 	name: "hood",
-// 				// 	views: 5
-// 				// }
+// 				{
+// 					name: "hood",
+// 					views: 5
+// 				}
 // 			]
 // 		}
 // 	)
 // )
 
-
-ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<App />
-		</Provider>
-	</React.StrictMode>,
-
-	document.getElementById('root')
-);
 
