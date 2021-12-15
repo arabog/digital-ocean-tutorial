@@ -1,7 +1,10 @@
 import "./App.css"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { getList, setItem } from "../../services/list"
+
+/* to run d json-server: npm run api
+check more info inside package.json file */
 
 
 function App() {
@@ -11,26 +14,34 @@ function App() {
 
 	const [alert, setAlert] = useState(false);
 
+	let mounted = useRef(true);
+	
 
 	useEffect(() => {
-		let mounted = true;
+		mounted.current = true;
+
+		if (list.length && !alert) {
+			return 
+		}
 
 		getList()
 			.then(items => {
-				if(mounted) {
+				if(mounted.current) {
 					setList(items)
 				}
 			})
 
-		return () => mounted = false;
-	}, [])
+		return () => mounted.current = false;
+	}, [alert, list])
 
 
 	useEffect(() => {
 		if(alert) {
 			setTimeout(
 				() => {
-					setAlert(false)
+					if (mounted.current) {
+						setAlert(false)
+					}
 				}, 1000
 			)
 		}
@@ -43,9 +54,11 @@ function App() {
 		setItem(itemInput)
 			.then(
 				() => {
-					setItemInput("")
+					if (mounted.current) {
+						setItemInput("")
 
-					setAlert(true)
+						setAlert(true)
+					}
 				}
 
 			)
@@ -59,14 +72,13 @@ function App() {
 			<ul>
 				{
 					list.map(item => (
-						<li key={item.item}> {item.item} </li>
+						<li key={item.id}> {item.item} </li>
 					))
 				}
 			</ul>
 
 			{
-				// alert && <h2> Submit Successful </h2>
-				alert ? <h2> Submit Successful </h2> : ""
+				alert && <h2> Submit Successful </h2>
 			}
 
 			<form onSubmit={handleSubmit}>
