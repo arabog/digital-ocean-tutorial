@@ -1,14 +1,8 @@
 import "./App.css"
-import AnimalCard from "../AnimalCard/AnimalCard";
-import data from "./data";
 
-function showAdditional(input) {
-	const alertInfo = Object.entries(input)
-				.map(info => `${info[0]} : ${info[1]}`)
-				.join("\n")
-
-	alert(alertInfo)
-}
+import Manatee from "../Manatee/Manatee";
+import Narwhal from "../Narwhal/Narwhal";
+import Whale from "../Whale/Whale";
 
 
 function App() {
@@ -16,25 +10,29 @@ function App() {
 
 	return (
 		<div className="wrapper">
-			<h1> Animals </h1>
+			<h1> Marine Mammals </h1>
 
-			{
-				data.map(animal => (
-					<AnimalCard 
-						additional = {animal.additional}
-						diet = {animal.diet}
-						key = {animal.name}
-						name = {animal.name}
-						scientificName = {animal.scientificName}
-						size = {animal.size}
+			<Manatee />
 
-						showAdditional = {showAdditional}
-					/>
-				))
-			}
+			<Narwhal />
+
+			<Whale />
 		</div>
 	);
 }
 
 
 export default App;
+
+/*
+If you didn’t have a router, you could conditionally display
+components using the useState Hook.
+
+But this wouldn’t offer a great experience for your users. 
+Anytime a user refreshes the page, the user’s selection would 
+disappear. Further, they wouldn’t be able to bookmark or
+share specific states of the application. A router will solve 
+all these problems. The router will preserve the user state 
+and will give the user a clear URL that they can save or 
+send to others
+*/ 
