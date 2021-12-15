@@ -5,6 +5,14 @@ import Narwhal from "../Narwhal/Narwhal";
 import Whale from "../Whale/Whale";
 
 
+import { 
+	BrowserRouter as Router,
+	Route,
+	Routes, //Switch now Routes
+	Link
+} from "react-router-dom"
+
+
 function App() {
 
 
@@ -12,11 +20,31 @@ function App() {
 		<div className="wrapper">
 			<h1> Marine Mammals </h1>
 
-			<Manatee />
 
-			<Narwhal />
 
-			<Whale />
+
+			<Router>
+				<nav>
+					<ul>
+						<li> <Link to="/manatee">Manatee</Link> </li>
+
+						<li> <Link to="/narwhal">Narwhal</Link> </li>
+
+						<li> <Link to="/whale">Whale</Link> </li>
+					</ul>
+				</nav>
+
+				<Routes>
+
+					<Route exact path="/" element={<Manatee />} />
+						
+					<Route exact path="/narwhal" element={<Narwhal />} />
+						
+					<Route exact path="/whale" element={<Whale />} />
+
+				</Routes>
+
+			</Router>
 		</div>
 	);
 }
