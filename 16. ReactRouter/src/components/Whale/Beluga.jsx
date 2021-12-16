@@ -6,7 +6,7 @@ const Beluga = () => {
 
           return (
                     <div>
-                              <h3>Beluga</h3>
+                              <h3>Things common to BELUGA Whales?</h3>
                     </div>
           )
 }

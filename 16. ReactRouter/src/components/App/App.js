@@ -8,7 +8,7 @@ import Whale from "../Whale/Whale";
 import { 
 	BrowserRouter as Router,
 	Route,
-	Routes, //Switch now Routes
+	Switch, //Switch now Routes
 	Link
 } from "react-router-dom"
 
@@ -31,18 +31,36 @@ function App() {
 						<li> <Link to="/narwhal">Narwhal</Link> </li>
 
 						<li> <Link to="/whale">Whale</Link> </li>
+
+						{/* using search params */}
+						{/* <li> <Link to="/whale?type=beluga">Beluga Whale</Link> </li> */}
+
+						{/* <li> <Link to="/whale?type=blue">Blue Whale</Link> </li> */}
+
+						{/* using URL parameter */}
+						<li> <Link to="/whale/beluga">Beluga Whale</Link> </li>
+
+						<li> <Link to="/whale/blue">Blue Whale</Link> </li>
 					</ul>
 				</nav>
 
-				<Routes>
+				<Switch>
 
-					<Route exact path="/" element={<Manatee />} />
+					<Route path="/manatee">
+							<Manatee />	
+					</Route>
 						
-					<Route exact path="/narwhal" element={<Narwhal />} />
+					<Route path="/narwhal" >
+						<Narwhal />
+					</Route>
 						
-					<Route exact path="/whale" element={<Whale />} />
+					<Route path="/whale" >
+						<Whale />
+					</Route>
 
-				</Routes>
+					{/* <Route exact path="/whale/:type" element={<Whale />} /> */}
+
+				</Switch>
 
 			</Router>
 		</div>
