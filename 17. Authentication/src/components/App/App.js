@@ -1,4 +1,3 @@
-import Product from "../Product/Product"
 
 
 function App() {
@@ -6,10 +5,17 @@ function App() {
 
 	return (
 		<div className="App">
-			<Product />
+			Hello Jesus
 		</div>
 	);
 }
 
 
 export default App;
+
+
+/*
+npm install react-router-dom
+
+npm install --save-dev express cors
+*/ 
