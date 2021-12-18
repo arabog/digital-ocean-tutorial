@@ -1,6 +1,8 @@
-import { useState } from "react";
-import CharacterMap from "../CharacterMap/CharacterMap";
 import "./App.css"
+
+import { useReducer, useState } from "react";
+
+import CharacterMap from "../CharacterMap/CharacterMap";
 
 
 function App() {
@@ -12,6 +14,9 @@ function App() {
 		user has not yet entered text.
 	*/ 
 	const [text, setText] = useState('')
+
+	// the useReducer Hook using d reducer fxn reverses the current state.
+	const [showExpl, toggleExpl] = useReducer(state => !state, false)
 
 
 	return (
@@ -32,8 +37,17 @@ function App() {
 				</textarea>
 			</label>
 
+			<div>
+				<button onClick={toggleExpl}> Show Explanation </button>
+			</div>
+
+			{
+				showExpl && 
+				<p> This displays a list of the most common characters. </p>
+			}
+
 			<CharacterMap text={text} />
-			
+
 		</div>
 	);
 }
