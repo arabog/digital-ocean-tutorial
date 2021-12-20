@@ -1,6 +1,6 @@
 import "./App.css"
 
-import { useReducer, useState } from "react";
+import { useCallback, useReducer, useState } from "react";
 
 import CharacterMap from "../CharacterMap/CharacterMap";
 
@@ -17,6 +17,31 @@ function App() {
 
 	// the useReducer Hook using d reducer fxn reverses the current state.
 	const [showExpl, toggleExpl] = useReducer(state => !state, false)
+
+	
+	// const transformer =  (item) => item.toLowerCase()
+	/*
+		In this particular component, you do not actually need the
+		useCallback Hook. You could declare the function outside 
+		of the component and it would never re-render. You should 
+		only declare functions inside of your component if they 
+		require some sort of prop or stateful data. But there are
+		times when you need to create functions based on internal 
+		state or props and in those situations you can use the
+		useCallback Hook to minimize re-renders.
+	*/ 
+	const transformer = useCallback ( 
+		(item) => item.toLowerCase(), 
+		
+		[]
+	)
+
+	/*useCallback(
+		() => {
+			callback
+		},
+		[input],
+	)*/
 
 
 	return (
@@ -41,12 +66,17 @@ function App() {
 				<button onClick={toggleExpl}> Show Explanation </button>
 			</div>
 
-			{
+			{/* {
+				// move to CharacterMap
 				showExpl && 
 				<p> This displays a list of the most common characters. </p>
-			}
+			} */}
 
-			<CharacterMap text={text} />
+			<CharacterMap 
+				showExpl = {showExpl} 
+				text={text} 
+				transformer = {transformer}
+			/>
 
 		</div>
 	);
@@ -54,3 +84,9 @@ function App() {
 
 
 export default App;
+
+/*
+	a === a  // This will evaluate to true
+
+	a === b  // This will evaluate to false
+*/ 
