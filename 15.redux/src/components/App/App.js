@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux"
 // actions
 import { addBird, incrementBird } from "../Redux/Action"
 
+import Navbar from "../Navbar/Navbar"
+
 
 /*
 It’s important to not try and do too much in your Redux store. 
@@ -54,46 +56,52 @@ function App() {
 
 
 	return (
-		<div className="wrapper">
-			<h1> Bird List </h1>
+		<div className="container">
+			<Navbar />
+
+			<div className="wrapper">
+
+				<h1> Bird List </h1>
 
 
-			<form onSubmit = {handleSubmit}>
-				<label>
-					<p> Add Bird </p>
+				<form onSubmit = {handleSubmit}>
+					<label>
+						<p> Add Bird </p>
 
-					<input 
-						type="text" 
-						onChange={e => setBirdName(e.target.value)}
-						value={birdName}	
-					/>
-				</label>
+						<input 
+							type="text" 
+							onChange={e => setBirdName(e.target.value)}
+							value={birdName}	
+						/>
+					</label>
 
-				<div>
-					<button type="submit"> Add </button>
-				</div>
-			</form>
+					<div>
+						<button type="submit"> Add </button>
+					</div>
+				</form>
 
 
-			<ul>
-				{
-					birds.map(bird => (
-						<li key = {bird.name} >
-							<h3> {bird.name} </h3>
+				<ul>
+					{
+						birds.map(bird => (
+							<li key = {bird.name} >
+								<h3> {bird.name} </h3>
 
-							<div> 
-								Views: {bird.views} 
+								<div> 
+									Views: {bird.views} 
 
-								<button onClick={() => dispatch(incrementBird(bird.name))}> 
-									<span role="img" aria-label="add"> 
-										+ 
-									</span> 
-								</button>
-							</div>
-						</li>
-					))
-				}
-			</ul>
+									<button onClick={() => dispatch(incrementBird(bird.name))}> 
+										<span role="img" aria-label="add"> 
+											+ 
+										</span> 
+									</button>
+								</div>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
 		</div>
 	);
 }
